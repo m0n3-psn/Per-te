@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Una domanda per te... ❤️</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #ffe6eb 0%, #ffd1dc 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      text-align: center;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #d63384;
+      font-size: 1.8rem;
+      margin: 20px 0;
+    }
+
+    .gif-container img {
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .btn-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      width: 100%;
+      min-height: 100px;
+      position: relative;
+    }
+
+    button {
+      padding: 14px 28px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    #yesBtn {
+      background-color: #28a745;
+      color: white;
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+      z-index: 2;
+    }
+
+    #noBtn {
+      background-color: #dc3545;
+      color: white;
+      box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+      z-index: 10;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="gif-container">
+    <img id="mainGif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYxdXZ6Ynl6dmE5OHRtMHBsYXRpMnEydXQ2ODlyeXN1cXFzZmFxaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L3X9GvpmP980OqjqQM/giphy.gif" alt="Love gif">
+  </div>
+
+  <h1 id="question">Vuoi essere la mia fidanzata? ❤️</h1>
+
+  <div class="btn-container" id="btnWrap">
+    <button id="yesBtn" onclick="selectYes()">Sì! 🥰</button>
+    <button id="noBtn" onclick="moveNo(event)" ontouchstart="moveNo(event)">No 😜</button>
+  </div>
+
+  <script>
+    let yesScale = 1;
+
+    function moveNo(e) {
+      if (e) e.preventDefault();
+      const noBtn = document.getElementById('noBtn');
+      const yesBtn = document.getElementById('yesBtn');
+
+      const maxX = window.innerWidth - noBtn.offsetWidth - 30;
+      const maxY = window.innerHeight - noBtn.offsetHeight - 30;
+
+      const randomX = Math.max(15, Math.floor(Math.random() * maxX));
+      const randomY = Math.max(15, Math.floor(Math.random() * maxY));
+
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+
+      yesScale += 0.25;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    }
+
+    function selectYes() {
+      document.getElementById('question').innerText = "Evviva! ❤️ Sapevo che avresti detto di sì!";
+      document.getElementById('mainGif').src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3pueGxsZXpjcW9xeWFvNXpueW93N3ptYmticXBzaHRocXR0MnNvcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif";
+      
+      const noBtn = document.getElementById('noBtn');
+      noBtn.style.display = 'none';
+
+      const yesBtn = document.getElementById('yesBtn');
+      yesBtn.style.transform = 'scale(1.4)';
+      yesBtn.style.backgroundColor = '#d63384';
+      yesBtn.innerText = 'Ti amo! 💕';
+    }
+  </script>
+</body>
+</html>
