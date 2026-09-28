@@ -27,11 +27,12 @@
     }
 
     .gif-container img {
-      width: 170px;
-      height: 170px;
+      width: 220px;
+      height: 220px;
       object-fit: cover;
       border-radius: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: src 0.3s ease;
     }
 
     .btn-container {
@@ -76,7 +77,8 @@
 <body>
 
   <div class="gif-container">
-    <img id="mainGif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYxdXZ6Ynl6dmE5OHRtMHBsYXRpMnEydXQ2ODlyeXN1cXFzZmFxaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L3X9GvpmP980OqjqQM/giphy.gif" alt="Love gif">
+    <!-- Immagine/GIF Iniziale -->
+    <img id="mainGif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYxdXZ6Ynl6dmE5OHRtMHBsYXRpMnEydXQ2ODlyeXN1cXFzZmFxaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L3X9GvpmP980OqjqQM/giphy.gif" alt="Foto">
   </div>
 
   <h1 id="question">Vuoi essere la mia fidanzata? ❤️</h1>
@@ -88,12 +90,26 @@
 
   <script>
     let yesScale = 1;
+    let photoIndex = 0;
+
+    // ELENCO DELLE FOTO CHE CAMBIANO A OGNI CLICK SU "NO"
+    // Puoi mettere i nomi dei file caricati su GitHub (es. 'foto1.jpg') oppure URL web
+    const imagesList = [
+      "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnJ3bzJvMDFxeHRydTB0NmoxbmtndmVsMXN1eWV1bmVycHMzeXAzcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ISOckXUvpE26c/giphy.gif",
+      "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWp3dWV4ZnR1dnJsd3B0d3p1Ym12ZnM2dnh3aGkyZW1wYnNwbTZmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKoWXm3okO1mgHC/giphy.gif",
+      "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnJzcXFzMWYxdmhhYm50OGYwaXJmcGJjZXBhc3lyOHpsZTRid2lsdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/d22UJ47yvGDXdbq0/giphy.gif"
+    ];
+
+    // FOTO/GIF FINALE QUANDO PREME "SÌ"
+    const finalImage = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3pueGxsZXpjcW9xeWFvNXpueW93N3ptYmticXBzaHRocXR0MnNvcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif";
 
     function moveNo(e) {
       if (e) e.preventDefault();
       const noBtn = document.getElementById('noBtn');
       const yesBtn = document.getElementById('yesBtn');
+      const mainGif = document.getElementById('mainGif');
 
+      // Calcola la nuova posizione casuale
       const maxX = window.innerWidth - noBtn.offsetWidth - 30;
       const maxY = window.innerHeight - noBtn.offsetHeight - 30;
 
@@ -104,13 +120,18 @@
       noBtn.style.left = `${randomX}px`;
       noBtn.style.top = `${randomY}px`;
 
+      // Ingrandisce il tasto "Sì"
       yesScale += 0.25;
       yesBtn.style.transform = `scale(${yesScale})`;
+
+      // Cambia foto a ogni tentativo
+      mainGif.src = imagesList[photoIndex];
+      photoIndex = (photoIndex + 1) % imagesList.length; // Cicla tra le foto
     }
 
     function selectYes() {
       document.getElementById('question').innerText = "Evviva! ❤️ Sapevo che avresti detto di sì!";
-      document.getElementById('mainGif').src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3pueGxsZXpjcW9xeWFvNXpueW93N3ptYmticXBzaHRocXR0MnNvcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif";
+      document.getElementById('mainGif').src = finalImage;
       
       const noBtn = document.getElementById('noBtn');
       noBtn.style.display = 'none';
