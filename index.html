@@ -17,24 +17,25 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       text-align: center;
       overflow: hidden;
-      padding: 15px;
+      padding: 10px;
     }
 
     h1 {
       color: #d63384;
       font-size: 1.8rem;
-      margin: 15px 0;
+      margin: 10px 0 15px 0;
     }
 
-    /* VISUALIZZATORE IMMAGINE */
+    /* VISUALIZZATORE IMMAGINE MOLTO PIÙ GRANDE */
     .gif-container img {
-      width: 90vw;
-      max-width: 360px;
-      height: 360px;
+      width: 95vw;
+      max-width: 420px;
+      height: 420px;
+      max-height: 52vh; /* Si adatta verticalmente se lo schermo è piccolo */
       object-fit: cover;
       border-radius: 25px;
-      border: 5px solid #ffffff;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+      border: 6px solid #ffffff;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.22);
       transition: src 0.3s ease;
     }
 
@@ -43,7 +44,7 @@
       gap: 20px;
       justify-content: center;
       align-items: center;
-      margin-top: 20px;
+      margin-top: 15px;
       width: 100%;
       min-height: 100px;
       position: relative;
@@ -51,7 +52,7 @@
 
     button {
       padding: 14px 28px;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: bold;
       border: none;
       border-radius: 30px;
@@ -88,7 +89,8 @@
 
   <div class="btn-container" id="btnWrap">
     <button id="yesBtn" onclick="selectYes()">Sì! 🥰</button>
-    <button id="noBtn" onclick="moveNo(event)" ontouchstart="moveNo(event)">No 😜</button>
+    <!-- Il primo testo parte già con la tua frase -->
+    <button id="noBtn" onclick="moveNo(event)" ontouchstart="moveNo(event)">Provami, se non rispondi subito non succede nulla</button>
   </div>
 
   <script>
@@ -96,18 +98,17 @@
     let photoIndex = 0;
     let textIndex = 0;
 
-    // TESTI DEL PULSANTE "NO" IN ORDINE
+    // TESTI SUCCESSIVI A OGNI CLICK
     const noTexts = [
-      "Provami, se non rispondi subito non succede nulla",
-      "Hai cliccato?",
+      "Hai cliccato davvero?",
       "Hai cliccato ancora?",
-      "MA DAVVERO?",
+      "MA DAVVERO NON STAI CLICCANDO SI E STAI RIDENDO?",
       "SEI SENZA VERGOGNA",
       "MARIANNA!",
       "SI <3"
     ];
 
-    // FOTO CHE CAMBIANO A OGNI CLICK SU "NO"
+    // FOTO CHE CAMBIANO A OGNI CLICK
     const imagesList = [
       "20260920_152508.jpg",
       "20260920_182149.jpg",
@@ -122,8 +123,8 @@
     function moveNo(e) {
       const noBtn = document.getElementById('noBtn');
       
-      // Se è arrivato all'ultimo testo ("SI <3"), si comporta come il tasto Sì
-      if (noTexts[textIndex] === "SI <3") {
+      // Se è arrivata all'ultimo testo ("SI <3"), attiva la risposta Sì
+      if (noBtn.innerText === "SI <3") {
         selectYes();
         return;
       }
@@ -132,17 +133,17 @@
       const yesBtn = document.getElementById('yesBtn');
       const mainGif = document.getElementById('mainGif');
 
-      // Cambia testo del pulsante
-      noBtn.innerText = noTexts[textIndex];
-      textIndex++;
-
-      // Se il prossimo testo è l'ultimo ("SI <3"), trasforma il pulsante in verde
-      if (noTexts[textIndex] === "SI <3") {
-        setTimeout(() => {
-          noBtn.innerText = "SI <3";
+      // Imposta il prossimo testo
+      if (textIndex < noTexts.length) {
+        noBtn.innerText = noTexts[textIndex];
+        
+        // Se è diventato "SI <3", trasforma il tasto in verde
+        if (noTexts[textIndex] === "SI <3") {
           noBtn.style.backgroundColor = "#28a745";
           noBtn.style.boxShadow = "0 4px 15px rgba(40, 167, 69, 0.4)";
-        }, 300);
+        }
+        
+        textIndex++;
       }
 
       // Calcola la nuova posizione casuale
