@@ -26,7 +26,7 @@
       margin: 15px 0;
     }
 
-    /* VISUALIZZATORE IMMAGINE MOLTO PIÙ GRANDE */
+    /* VISUALIZZATORE IMMAGINE */
     .gif-container img {
       width: 90vw;
       max-width: 360px;
@@ -94,6 +94,18 @@
   <script>
     let yesScale = 1;
     let photoIndex = 0;
+    let textIndex = 0;
+
+    // TESTI DEL PULSANTE "NO" IN ORDINE
+    const noTexts = [
+      "Provami, se non rispondi subito non succede nulla",
+      "Hai cliccato?",
+      "Hai cliccato ancora?",
+      "MA DAVVERO?",
+      "SEI SENZA VERGOGNA",
+      "MARIANNA!",
+      "SI <3"
+    ];
 
     // FOTO CHE CAMBIANO A OGNI CLICK SU "NO"
     const imagesList = [
@@ -108,10 +120,30 @@
     const finalImage = "20260927_171724.jpg";
 
     function moveNo(e) {
-      if (e) e.preventDefault();
       const noBtn = document.getElementById('noBtn');
+      
+      // Se è arrivato all'ultimo testo ("SI <3"), si comporta come il tasto Sì
+      if (noTexts[textIndex] === "SI <3") {
+        selectYes();
+        return;
+      }
+
+      if (e) e.preventDefault();
       const yesBtn = document.getElementById('yesBtn');
       const mainGif = document.getElementById('mainGif');
+
+      // Cambia testo del pulsante
+      noBtn.innerText = noTexts[textIndex];
+      textIndex++;
+
+      // Se il prossimo testo è l'ultimo ("SI <3"), trasforma il pulsante in verde
+      if (noTexts[textIndex] === "SI <3") {
+        setTimeout(() => {
+          noBtn.innerText = "SI <3";
+          noBtn.style.backgroundColor = "#28a745";
+          noBtn.style.boxShadow = "0 4px 15px rgba(40, 167, 69, 0.4)";
+        }, 300);
+      }
 
       // Calcola la nuova posizione casuale
       const maxX = window.innerWidth - noBtn.offsetWidth - 30;
@@ -141,6 +173,7 @@
       noBtn.style.display = 'none';
 
       const yesBtn = document.getElementById('yesBtn');
+      yesBtn.style.position = 'static';
       yesBtn.style.transform = 'scale(1.3)';
       yesBtn.style.backgroundColor = '#d63384';
       yesBtn.innerText = 'Ti amo! 💕';
