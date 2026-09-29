@@ -16,8 +16,8 @@
       background: linear-gradient(135deg, #ffe6eb 0%, #ffd1dc 100%);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       text-align: center;
-      overflow: hidden;
-      padding: 10px;
+      overflow-x: hidden;
+      padding: 15px;
     }
 
     h1 {
@@ -26,12 +26,12 @@
       margin: 10px 0 15px 0;
     }
 
-    /* VISUALIZZATORE IMMAGINE MOLTO PIÙ GRANDE */
+    /* VISUALIZZATORE IMMAGINE GRANDE */
     .gif-container img {
       width: 95vw;
       max-width: 420px;
-      height: 420px;
-      max-height: 52vh; /* Si adatta verticalmente se lo schermo è piccolo */
+      height: 380px;
+      max-height: 48vh;
       object-fit: cover;
       border-radius: 25px;
       border: 6px solid #ffffff;
@@ -46,7 +46,7 @@
       align-items: center;
       margin-top: 15px;
       width: 100%;
-      min-height: 100px;
+      min-height: 80px;
       position: relative;
     }
 
@@ -76,6 +76,65 @@
       z-index: 10;
       position: relative;
     }
+
+    /* BOX CONTRATTO FINALE */
+    .congrats-box {
+      display: none;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 15px;
+      max-width: 420px;
+      width: 95vw;
+      text-align: left;
+      box-shadow: 0 10px 25px rgba(214, 51, 132, 0.2);
+      border: 2px solid #ffb6c1;
+    }
+
+    .congrats-title {
+      color: #d63384;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .congrats-subtitle {
+      color: #444;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+    }
+
+    .congrats-intro {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .congrats-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.92rem;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .congrats-list li {
+      margin-bottom: 10px;
+    }
+
+    .congrats-footer {
+      text-align: center;
+      font-weight: bold;
+      color: #d63384;
+      margin-top: 15px;
+      font-size: 0.95rem;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -89,8 +148,23 @@
 
   <div class="btn-container" id="btnWrap">
     <button id="yesBtn" onclick="selectYes()">Sì! 🥰</button>
-    <!-- Il primo testo parte già con la tua frase -->
     <button id="noBtn" onclick="moveNo(event)" ontouchstart="moveNo(event)">Provami, se non rispondi subito non succede nulla</button>
+  </div>
+
+  <!-- BOX FINALE CON IL CONTRATTO -->
+  <div class="congrats-box" id="congratsBox">
+    <div class="congrats-title">CONGRATULAZIONI! 🎉✨</div>
+    <div class="congrats-subtitle">Ora sei ufficialmente fidanzata!</div>
+    <div class="congrats-intro">
+      Con l’acquisto (totalmente gratuito) di questo pacchetto “Fidanzamento Ufficiale”, hai attivato con successo i seguenti vantaggi esclusivi a vita:
+    </div>
+    <ul class="congrats-list">
+      <li>🗓️ <strong>La Regola del 15:</strong> Il 15 di ogni singolo mese sei ufficialmente convocata a un date speciale per festeggiare noi. Nessuna eccezione ammessa!</li>
+      <li>💖 <strong>Garanzia a vita:</strong> Diritto illimitato e garantito a essere amata, protetta, coccolata e viziata in ogni momento.</li>
+      <li>🎭 <strong>Quota Risate:</strong> Dosi giornaliere assicurate di battute, scherzi, risate a crepapelle e complicità pura.</li>
+      <li>🛡️ <strong>Presenza H24:</strong> La certezza assoluta che ci sarò sempre, al tuo fianco: nei giorni più belli da festeggiare e in quelli storti da affrontare insieme.</li>
+    </ul>
+    <div class="congrats-footer">Contratto firmato col cuore e non rescindibile. ❤️</div>
   </div>
 
   <script>
@@ -167,17 +241,12 @@
     }
 
     function selectYes() {
-      document.getElementById('question').innerText = "Evviva! ❤️ Sapevo che avresti detto di sì!";
+      document.getElementById('question').style.display = 'none';
+      document.getElementById('btnWrap').style.display = 'none';
       document.getElementById('mainGif').src = finalImage;
       
-      const noBtn = document.getElementById('noBtn');
-      noBtn.style.display = 'none';
-
-      const yesBtn = document.getElementById('yesBtn');
-      yesBtn.style.position = 'static';
-      yesBtn.style.transform = 'scale(1.3)';
-      yesBtn.style.backgroundColor = '#d63384';
-      yesBtn.innerText = 'Ti amo! 💕';
+      // Mostra il box contratto
+      document.getElementById('congratsBox').style.display = 'block';
     }
   </script>
 </body>
