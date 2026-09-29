@@ -141,7 +141,7 @@
 
   <div class="gif-container">
     <!-- Immagine Iniziale -->
-    <img id="mainGif" src="20260920_152506.jpg" alt="Foto">
+    <img id="mainGif" src="20260912_201853.jpg" alt="Foto">
   </div>
 
   <h1 id="question">Vuoi essere la mia fidanzata? ❤️</h1>
@@ -177,22 +177,28 @@
       "Hai cliccato davvero?",
       "Hai cliccato ancora?",
       "MA DAVVERO NON STAI CLICCANDO SI E STAI RIDENDO?",
+      "Pensavi davvero di poter dire di no?",
+      "Guarda che il tasto 'Sì' sta diventando enorme!",
+      "Ok, adesso stai solo testando la mia pazienza...",
       "SEI SENZA VERGOGNA",
       "MARIANNA!",
       "SI <3"
     ];
 
-    // FOTO CHE CAMBIANO A OGNI CLICK
+    // TUTTE LE FOTO IN ORDINE
     const imagesList = [
+      "20260912_221232.jpg",
+      "20260916_184701.jpg",
+      "20260919_144938.jpg",
+      "20260920_152506.jpg",
       "20260920_152508.jpg",
       "20260920_182149.jpg",
       "20260923_185855.jpg",
-      "20260924_225630.jpg",
-      "20260926_224933.jpg"
+      "20260924_225630.jpg"
     ];
 
     // FOTO FINALE QUANDO PREME "SÌ"
-    const finalImage = "20260927_171724.jpg";
+    const finalImage = "20260926_224933.jpg";
 
     function moveNo(e) {
       const noBtn = document.getElementById('noBtn');
@@ -232,7 +238,7 @@
       noBtn.style.top = `${randomY}px`;
 
       // Ingrandisce il tasto "Sì"
-      yesScale += 0.25;
+      yesScale += 0.2;
       yesBtn.style.transform = `scale(${yesScale})`;
 
       // Cambia foto a ogni tentativo
