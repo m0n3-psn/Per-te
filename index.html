@@ -27,8 +27,8 @@
     }
 
     .gif-container img {
-      width: 220px;
-      height: 220px;
+      width: 230px;
+      height: 230px;
       object-fit: cover;
       border-radius: 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -77,8 +77,8 @@
 <body>
 
   <div class="gif-container">
-    <!-- Immagine/GIF Iniziale -->
-    <img id="mainGif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYxdXZ6Ynl6dmE5OHRtMHBsYXRpMnEydXQ2ODlyeXN1cXFzZmFxaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L3X9GvpmP980OqjqQM/giphy.gif" alt="Foto">
+    <!-- Immagine Iniziale -->
+    <img id="mainGif" src="20260920_152506.jpg" alt="Foto">
   </div>
 
   <h1 id="question">Vuoi essere la mia fidanzata? ❤️</h1>
@@ -92,16 +92,17 @@
     let yesScale = 1;
     let photoIndex = 0;
 
-    // ELENCO DELLE FOTO CHE CAMBIANO A OGNI CLICK SU "NO"
-    // Puoi mettere i nomi dei file caricati su GitHub (es. 'foto1.jpg') oppure URL web
+    // FOTO CHE CAMBIANO A OGNI CLICK SU "NO"
     const imagesList = [
-      "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMnJ3bzJvMDFxeHRydTB0NmoxbmtndmVsMXN1eWV1bmVycHMzeXAzcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ISOckXUvpE26c/giphy.gif",
-      "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWp3dWV4ZnR1dnJsd3B0d3p1Ym12ZnM2dnh3aGkyZW1wYnNwbTZmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKoWXm3okO1mgHC/giphy.gif",
-      "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnJzcXFzMWYxdmhhYm50OGYwaXJmcGJjZXBhc3lyOHpsZTRid2lsdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/d22UJ47yvGDXdbq0/giphy.gif"
+      "20260920_152508.jpg",
+      "20260920_182149.jpg",
+      "20260923_185855.jpg",
+      "20260924_225630.jpg",
+      "20260926_224933.jpg"
     ];
 
-    // FOTO/GIF FINALE QUANDO PREME "SÌ"
-    const finalImage = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3pueGxsZXpjcW9xeWFvNXpueW93N3ptYmticXBzaHRocXR0MnNvcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif";
+    // FOTO FINALE QUANDO PREME "SÌ"
+    const finalImage = "20260927_171724.jpg";
 
     function moveNo(e) {
       if (e) e.preventDefault();
@@ -126,7 +127,7 @@
 
       // Cambia foto a ogni tentativo
       mainGif.src = imagesList[photoIndex];
-      photoIndex = (photoIndex + 1) % imagesList.length; // Cicla tra le foto
+      photoIndex = (photoIndex + 1) % imagesList.length;
     }
 
     function selectYes() {
